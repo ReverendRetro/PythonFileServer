@@ -12,6 +12,7 @@ from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 * 1024 # 16 GB limit
 app.permanent_session_lifetime = timedelta(days=30)
 
 # --- Embedded HTML Templates ---
