@@ -110,16 +110,22 @@ This setup will ensure the file server starts automatically when your server boo
     Run the following commands to enable and start the new service.
     
     ### Reload the systemd daemon to recognize the new file
-    `sudo systemctl daemon-reload`
+    ```
+    sudo systemctl daemon-reload
+    ```
 
     ### Enable the service to start on boot
-    `sudo systemctl enable fileserver.service`
+    ```
+    sudo systemctl enable fileserver.service
+    ```
 
     ### Start the service immediately
-    `sudo systemctl start fileserver.service`
+    ```
+    sudo systemctl start fileserver.service
+    ```
     
 
-4.  **Check the Status:**
+5.  **Check the Status:**
     You can verify that the service is running correctly with this command:
     ```
     sudo systemctl status fileserver.service
