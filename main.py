@@ -11,8 +11,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 * 1024 # 16 GB limit
+app.secret_key = os.urandom(24)
 app.permanent_session_lifetime = timedelta(days=30)
 
 # --- Embedded HTML Templates ---
@@ -529,11 +529,12 @@ INDEX_HTML = """
             const chunkSize = 1024 * 1024 * 2; // 2MB chunks for hashing
             const totalChunks = Math.ceil(file.size / chunkSize);
             let currentChunk = 0;
-            const spark = new CryptoJS.lib.WordArray.init();
+            const hasher = CryptoJS.algo.SHA256.create();
             const reader = new FileReader();
 
             reader.onload = (event) => {
-                spark.concat(CryptoJS.lib.WordArray.create(event.target.result));
+                const wordArray = CryptoJS.lib.WordArray.create(event.target.result);
+                hasher.update(wordArray);
                 currentChunk++;
                 
                 if (progressCallback) {
@@ -543,7 +544,7 @@ INDEX_HTML = """
                 if (currentChunk < totalChunks) {
                     loadNext();
                 } else {
-                    const hash = CryptoJS.SHA256(spark).toString();
+                    const hash = hasher.finalize().toString();
                     resolve(hash);
                 }
             };
