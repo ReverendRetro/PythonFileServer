@@ -16,7 +16,7 @@ Single Python file, should be universal but I test on Debian so steps are for wh
 * **Resumable Uploads:** Client-side hashing allows uploads to be resumed if the connection is interrupted.
 * **Media Handling:**
     * **Audio:** Stream a wide variety of audio formats (`.mp3`, `.flac`, `.wav`, etc.) in a built-in player.
-    * **Video:** Stream common video formats in a new browser tab. - WIP
+    * **Video:** Stream common video formats in a new browser tab.
     * **Images:** View images in a popup modal with zoom controls. - WIP
 * **Customizable UI:**
     * Toggle between list and icon views.
